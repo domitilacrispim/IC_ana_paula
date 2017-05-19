@@ -1,0 +1,397 @@
+\documentclass[red]{beamer} %pode mudar a cor do beamer, mas so para cores padrao
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{graphicx,color}
+\usepackage[active]{srcltx}
+\usepackage[latin1]{inputenc}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{listings}
+\usepackage{url}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%.................................. Defini\c{c}\~{a}o de comandos........................................
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\dem}{\noindent\textbf{\underline{Prova}.}\hspace{0.6cm}}   %começo de uma demonstracao
+\newcommand{\cqd}{$\hfill\blacksquare$}                                  %fim de uma demonstração
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+%\newcommand{\C}{\mathbb{Cr}}
+\newcommand{\supp}{\textrm{supp}~}
+\newcommand{\Aut}{{\rm Aut}}
+\renewcommand{\b}{{\partial}}
+\def\join{\ast}
+%========================================================================================================
+ \DeclareMathOperator*{\esup}{\textrm{ess\,sup}~}
+ \DeclareMathOperator*{\re}{Re\,}
+ \DeclareMathOperator*{\im}{Im\,}
+ \DeclareMathOperator*{\sen}{sen}
+ \DeclareMathOperator*{\spa}{span}
+ \DeclareMathOperator*{\tg}{tg}
+ \DeclareMathOperator*{\ctg}{ctg}
+ \DeclareMathOperator*{\grau}{grau}
+ \DeclareMathOperator*{\diag}{diag}
+ \DeclareMathOperator*{\trac}{tra\c{c}o}
+%=======================================================================================================
+\newcommand{\pr}{\hspace{0.67cm}}
+\def\noi{\noindent}
+\def\dis{\displaystyle}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%......................Defini\c{c}\~{a}o de Teoremas, Corol\'{a}rios, etc........................
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{teo}{Teorema}[section]
+\newtheorem{prop}{Proposi\c{c}\~{a}o}[section]
+\newtheorem{definicao}{Defini\c{c}\~{a}o}[section]
+\newtheorem{lema}{Lema}[section]
+\newtheorem{corolario}{Corol\'{a}rio}[section]
+\newtheorem{obs}{Observação} [section]        %
+\newtheorem{exemplo}{Exemplo}[section]     %
+\newtheorem{problema}{Problema}[section]
+
+
+
+\setlength{\parindent}{4ex} \setlength{\parskip}{2ex}
+\usepackage{beamerthemeshadow}
+
+\vspace{-7cm}
+
+
+\title{\textbf{Transformação linear aplicada em sistemas de cores}} %colocar titulo
+
+\vspace*{-0.5cm}
+\author[Pietropaolo D. C.; Galves, A. P. T.]{
+  Domitila Crispim Pietropaolo - Bolsista PICME \\
+  Orientadora: Prof. Dra. Ana Paula Tremura Galves } %colocar seu nome e da orientadora
+
+\vspace*{-0.5cm}
+
+\institute[Universidade Federal de Uberl\^{a}ndia]{
+    Faculdade de Matem\'{a}tica \\
+    Universidade Federal de Uberl\^{a}ndia}
+
+  \vspace*{-0.65cm}
+
+\date{VI Mostra de Inicia\c{c}\~{a}o Cient\'{i}fica \\ Maio de 2017} %mudar o nome do evento
+
+
+\begin{document}
+
+
+\frame{\titlepage}
+\part<presentation>{Main Talk} % tira nomes de se\c{c}\~{o}es escritos no cabe\c{c}alho da p\'{a}gina inicial
+
+
+\AtBeginSection[]{
+  \frame<handout:0>{
+    \frametitle{Sum\'{a}rio}
+    \tableofcontents[current,currentsection]
+  }
+} %comando que gera o sumario
+
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+%todo slide \'{e} definido comecando com \frame{ e terminando com }
+
+\section{Objetivo}
+
+\frame{\frametitle{Objetivo} %colocar aqui dentro o nome da secao para aparecer escrito no slide de forma destacada
+
+A ideia central do trabalho é fazer a conversão entre sistemas de cores (XYZ e RGB, CMY e RGB, YIQ e RGB) utilizando conceitos simples de álgebra linear, tais como transformação linear e mudança de base no espaço vetorial.
+
+% colocar o objetivo
+
+ }
+
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+\section{Metodologia}
+
+\subsection{Fundamentação teórica}
+\frame{\frametitle{Transformação linear}
+
+\begin{definicao}
+ Seja $T: U \to V$ uma transformação linear com $U$ e $V$ espaços vetoriais de dimensão finita. Sejam $B=\{u_1, ..., u_n\}$ uma base de $U$ e $C=\{v_1, ..., v_m\}$ uma base de $V$, podemos escrever $T(u_j)= a_{1j}v_1 +...+ a_{mj}v_m$, $j=1,..., n$. A matriz:
+ $$\left(
+     \begin{array}{cccc}
+       a_{11} & a_{12} & \cdots & a_{1n} \\
+       a_{21} & a_{22} & \cdots & a_{2n} \\
+       \vdots & \vdots & \ddots & \vdots \\
+       a_{m1} & a_{m2} & \cdots & a_{mn} \\
+     \end{array}
+   \right) \in M_{m\times n}
+ $$
+\noindent é chamada matriz de transformação $T$ com relação as bases $B$ e $C$.
+\end{definicao}
+ }
+
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+%::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+\section{Resultados}
+
+\frame{
+    \frametitle{Sistema RGB}
+
+O olho humano possui três tipos de células cones, as quais captam as cores e levam-nas até o cérebro. Young-Helmholtz estabelece, no seu modelo tricromático, que sistemas de processamento de cor do olho humano baseiam-se na amostragem das faixas vermelha, verde e azul do espectro visível, feitas pelas moléculas fotossensíveis do olho. E com isso, surge o primeiro modelo padrão básico: CIE-RGB (CIE: Commission Internationale de l'Eclairage).
+}
+
+\frame{
+   \centerline{\includegraphics[scale=0.15]{rgb.jpg}}
+     \vspace{0.3cm}
+     \centerline{Figura ilustrando o Sistema RGB}
+}
+
+\frame{
+\frametitle{O modelo XYZ e a mudança de coordenadas em relação ao RGB}
+Devido a incapacidade que o monitor possuía em projetar todas as cores visíveis pelo olho humano, o sistema CIE-XYZ foi criado para trazer modificações de proporções de intensidade das cores.}
+\frame{
+No sistema XYZ as coordenadas das cores primárias (RGB) são dadas pelos seguintes vetores: $R = (0.73467, 0.26533, 0.0)$, $G = (0.27376, 0.71741, 0.00883)$, $B = (0.16658, 0.00886, 0.82456)$, os quais correspondem aos vetores $R=(1,0,0)$, $G=(0,1,0)$ e $B=(0,0,1)$ no sistema RGB. Para obter uma transformação entre esses dois sistemas devemos buscar um outro conjunto de vetores comum aos espaços XYZ e RGB.
+}
+
+\frame{
+Tome os vetores que correspondem a cor branca em cada um dos sistemas, que tem coordenadas $\displaystyle \left(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}\right)$. Dessa forma, a transformação linear do sistema RGB no sistema XYZ é definida por $T(R,G,B)=(X,Y,Z)$ e, usando o fato que $T\displaystyle \left(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}\right)=\displaystyle \left(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}\right)$ obtemos uma matriz de transformação de coordenadas dada por:
+$$ \left(
+\begin{array}{ccc}
+ X \\
+Y\\
+Z
+\end{array}
+\right) =
+ \left(
+\begin{array}{ccc}
+0.49   & 0.17697    & 0  \\
+0.31  & 0.81240     & 0.01 \\
+0.2   & 0.01063 & 0.99
+\end{array}
+\right)
+.
+\left(
+\begin{array}{ccc}
+ R  \\
+G \\
+B
+\end{array}
+\right)
+$$
+
+\noindent que faz a mudança de coordenadas no sistema RGB para o sistema XYZ.
+ }
+\frame{
+\centerline{\includegraphics[scale=0.5]{xyz.jpg}}
+\centerline{Figura ilustrativa de como XYZ se representa no plano}
+}
+\frame{
+Tentando obter coordenadas RGB a partir de um vetor CMY V=(-0.0210; 0.6121; 0.4876).
+
+    $$ \left(
+\begin{array}{ccc}
+ X \\
+Y\\
+Z
+\end{array}
+\right) =
+ \left(
+\begin{array}{ccc}
+0.49   & 0.17697    & 0  \\
+0.31  & 0.81240     & 0.01 \\
+0.2   & 0.01063 & 0.99
+\end{array}
+\right)
+.
+\left(
+\begin{array}{ccc}
+ -0.021 \\
+0.6121 \\
+0.4876
+\end{array}
+\right)
+$$
+
+Fazendo as contas temos que  V = (0.0980, 0.4956, 0.4850) é o vetor que procuramos .
+}
+ \frame {
+    \frametitle{O modelo CMY e a mudança de coordenadas em relação ao RGB}
+
+Baseando-se nas cores complementares, o CMY é designado por modelo subtrativo de cor, opondo-se ao modelo RGB que é designado por modelo aditivo de cor. É muito utilizado em impressão a cores em papel branco (como já foi citado na introdução).
+
+A transformação do espaço CMY no espaço RGB é a mais simples, basicamente consiste em
+$$
+\left(
+\begin{array}{ccc}
+R    \\
+G  \\
+B
+\end{array}
+\right)
+=\left(
+\begin{array}{ccc}
+1    \\
+1  \\
+1
+\end{array}
+\right)
+-
+\left(
+\begin{array}{ccc}
+C    \\
+M  \\
+Y	
+\end{array}
+\right).
+$$
+}
+\frame{
+   \centerline{\includegraphics[scale=0.6]{cubo.jpg}}
+     \vspace{0.3cm}
+     \centerline{Figura ilustrando o Sistema CMY}
+}
+\frame{
+Tentando obter coordenadas RGB a partir de um vetor CMY V=(0.212, 0.565, 0.354).
+
+ $$
+\left(
+\begin{array}{ccc}
+R    \\
+G  \\
+B
+\end{array}
+\right)
+=\left(
+\begin{array}{ccc}
+1    \\
+1  \\
+1
+\end{array}
+\right)
+-
+\left(
+\begin{array}{ccc}
+0.212   \\
+ 0.565 \\
+0.354
+\end{array}
+\right).
+$$
+
+Fazendo as contas temos que  V =(0.788, 0.435, 0.646) é o vetor que procuramos .
+}
+\frame{
+\frametitle{O modelo YIQ e a mudança de coordenadas em relação ao RGB}
+Utilizado no sistema NTSC (National Television Standards Committee) o modelo YIQ foi criado para permitir que as emissões dos sistemas de televisão em cores fossem compatíveis com os receptores em preto e branco.
+
+ \vspace{0.3cm}
+
+\centerline{\includegraphics[scale=0.25]{televisao.jpg}}
+
+}
+\frame{ Baseia-se na divisão dos sinais de cor RGB em um sinal de luminosidade, ou luminância $(Y)$, dada por:
+ $$ Y=0.299\, R+ 0.587 \, G+ 0.114 \, B. $$
+
+Os parâmetros $I$ e $Q$ estão relacionados às cores propriamente, então envolvem luminância e as cores RGB em suas fórmulas, como podemos observar:
+$$I=0.74(R-Y)-0.27(B-Y)$$
+$$Q=0.48(R-Y)+0.41(B-Y).$$
+}
+
+\frame{
+Dessa forma, isolando as variáveis $Y$, $I$ e $Q$ em função de $R$, $G$ e $B$, chegamos na seguinte matriz de transformação do espaço de cor RGB para o espaço YIQ
+$$ \left(
+\begin{array}{ccc}
+ Y  \\
+I \\
+Q
+\end{array}
+\right) =
+ \left(
+\begin{array}{ccc}
+0.299   & 0.587    & 0.114  \\
+0.596  & -0.275      & -0.321 \\
+0.212   & -0.523 & -0.311
+\end{array}
+\right)
+.
+\left(
+\begin{array}{ccc}
+ R  \\
+G \\
+B
+\end{array}
+\right)
+$$
+}
+
+\frame{
+Tentando obter coordenadas YIQ a partir de um vetor RGB V=(0.213, 0.772 , 0.564).
+
+$$ \left(
+\begin{array}{ccc}
+ Y  \\
+I \\
+Q
+\end{array}
+\right) =
+ \left(
+\begin{array}{ccc}
+0.299   & 0.587    & 0.114  \\
+0.596  & -0.275      & -0.321 \\
+0.212   & -0.523 & -0.311
+\end{array}
+\right)
+.
+\left(
+\begin{array}{ccc}
+0.213  \\
+0.772 \\
+0.564
+\end{array}
+\right)
+$$
+
+Fazendo as contas temos que  V = (0.5808, -0.2670, -0.5342) é o vetor que procuramos .
+
+}
+%::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+\section{Conclus\~{a}o}
+
+\frame{
+No trabalho podemos observar que a álgebra linear auxiliou processos de cálculo para que as cores possam ser exibidas e transmitidas em diferentes plataformas, como televisores, monitores, etc. O ponto mais importante desse trabalho é como vários sistemas de cores podem ser reduzidos a espaços vetoriais e manipulados facilmente através de transformações lineares.
+}
+
+%::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+\frame{\frametitle{Refer\^{e}ncias bibliogr\'{a}ficas}
+\begin{thebibliography}{9}
+
+{\beamertemplatearticlebibitems
+\bibitem{zill} Biezuner, R. J.; Macedo, E. A. A.; Moreira, B. T. \textit{Mudanças de coordenadas em sistemas de cores}. Belo Horizonte: UFMG. Google Acadêmico. PDF.}
+{\beamertemplatearticlebibitems
+\bibitem{mimi} Gomes, J. (1994). \textit{Computação gráfica: imagem}. Rio de Janeiro: IMPA/SBM.}
+
+{\beamertemplatebookbibitems
+\bibitem{barreto} Howard, A.; Rorres, C. (2001). \textit{Álgebra linear com aplicações}. Porto Alegre: Bookman.} % colocar essa referencia quando for artigo
+
+\end{thebibliography}
+}
+
+
+% estilo para aparecer um icone de um livro
+    %\beamertemplatebookbibitems
+    % estilo para aparecer um icone de um paper =)
+    %\beamertemplatearticlebibitems
+
+
+\frame{
+\centerline{\textbf{\underline{\Huge{Obrigado!  }}}}}
+
+\end{document} 
