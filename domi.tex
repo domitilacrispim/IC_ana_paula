@@ -1,0 +1,263 @@
+\documentclass[a4paper,10pt]{report}
+
+\usepackage[brazil]{babel}
+\usepackage{epsfig}
+\usepackage{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{graphics}
+%\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{indentfirst}
+
+\geometry{lmargin=2.0cm,rmargin=2.0cm,tmargin=2.0cm,bmargin=2.0cm}
+\setlength{\parindent}{1cm}
+\setlength{\parskip}{0.25cm}
+
+\everymath{\displaystyle}
+
+\newtheorem{teorema}{\normalcolor Teorema}
+\newtheorem{corolario}[teorema]{\normalcolor Corol\'ario}
+\newtheorem{proposicao}[teorema]{\normalcolor Proposi\c c\~ao}
+\newtheorem{definicao}{\normalcolor Defini\c{c}\~{a}o}
+\newtheorem{exemplo}{\normalcolor Exemplo}
+\newtheorem{lema}[teorema]{\normalcolor Lema}
+
+\newcommand{\conjC}{\mathbb{C}}
+\newcommand{\conjR}{\mathbb{R}}	
+\newcommand{\conjN}{\mathbb{N}}
+\newcommand{\conjT}{\mathbb{T}}
+
+%%%%%%%%%%%%%%%%%%%    DEMOSTRACAO    %%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\newproof}[3]{
+   \newenvironment{#1}[1][]%
+   {%
+      \begin{trivlist}%
+         \item[\hspace{\labelsep}\textnormal{\textbf{#2%
+            \def\op@@@arg{##1}%
+            \ifx\op@@@arg\empty
+            \else~\empty\fi %%ou (##1) no lugar de \empty
+         }}]%
+   }%
+   {%
+      #3
+      \end{trivlist}%
+   }%
+}
+
+\def\qedtext{\ensuremath{\rule{6pt}{6pt}}}
+\newproof{dem}{Demonstra\c{c}\~ao.}{\hfill{$\square$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\vspace{-1.8in}
+\parbox{\linewidth}{
+\footnotesize\noindent
+{\bf VI Mostra de Iniciação Científica da FAMAT}
+\\
+\hspace{1.1cm}
+{\bf 25 e 26 de maio de 2017}
+}
+\vspace{0.2in}
+
+\begin{center}
+{\bf \LARGE Transformação linear aplicada em sistemas de cores}
+\end{center}
+\begin{center}
+{\large{Domitila Crispim Pietropaolo, Ana Paula Tremura Galves\\
+Faculdade de Matemática - Universidade Federal de Uberlândia  \\
+domitilacrispim@gmail.com, ana.galves@ufu.br}}
+\end{center}
+
+
+\section*{Objetivo}
+
+
+O terremoto é um fenômeno natural, ele ocorre pois as placas tectônicas se movem devido à pressão do magma, com isso as placas se chocam e geram um tremor na superfície, caso seja no oceano é chamado de maremoto, no continente nomeamos de terremoto.
+
+
+Será utilizados conceitos de sistemas equações diferenciais odinárias, números complexos e lei de Hooke. Um sistema de EDO é basicamente um sistema de equacações onde uma ou mais variavéis estão com algum grau de derivação. Números complexos se utilizam do numero i e basicamente são divididas entre parte real e imaginária, são escritos da forma X = a + i b onde X eh o numero complexo, a e b são números reais.
+
+
+A lei de Hooke vem da física e diz que F = m*k, onde f representa força, m massa e K uma constante elástica que varia de cada material. Entretanto não vamos usar ela de forma pura, como é enunciada, vamos usar um modelo enunciado a partir dela.
+
+\section*{Metodologia}
+
+\emph{O modelo}
+
+Tome um prédio com n andares, podemos aplicar a lei de Hooke com uma constante elástica que abrange o espaço entre os andares da seguinte forma:
+
+
+\centerline{$F=k_{i}\times (X_{i+1} - X_{i})$}
+
+
+Nessa fórmula o ni representa o deslocamento horizontal no i-ésimo andar. Para completar o modelo vamos relacionar com a 2ª lei de Newton, que enuncia a fórmula:
+
+
+\centerline{$F=m\times a$}
+
+
+Sabendo dessas informações podemos relacionar os dois conceitos em um sistema de equações diferenciais.
+
+\centerline{$\begin{cases}
+m_{1}x"_{1}=k_{0}x_{1}+k_{1}(x_{2}-x_{1}) \\
+m_{2}x"_{2}=-k_{1}(x_{2}-x_{1})+k_{2}(x_{3}-x_{2})\\
+\vdots \\
+m_{n}x"_{n}=k_{n-1}(x_{n}-x_{n-1})
+\end{cases}$}
+
+
+\emph{O exemplo}
+
+Para ilustrar essa explicação, vamos associar a teoria a um exemplo prático:
+Seja um prédio com 2 andares e cada andar tem massa m = 6000kg e uma força $k=18000 kg/s^2$.
+A partir dessas informações obtemos o seguinte sistema, já simplicado :
+
+\centerline{$\begin{cases}
+x"_{1}=-6x_{1}+3x_{2} \\
+x"_{2}=3x_{1}-3x_{2}
+\end{cases}$}
+
+Como o sistema possui uma 2ª derivada, será necessário fazer uma substituição.
+
+
+\section*{Resultados}
+A representação do espaço espectral das cores é um espaço vetorial de dimensão finita. Neste trabalho, iremos utilizar o espaço vetorial $R^3$.
+
+\vspace{0.3cm}
+
+\noindent {\large\textbf{1. Sistemas de cores RGB}}
+
+O olho humano possui três tipos de células cones, as quais captam as cores e levam-nas até o cérebro. Young-Helmholtz estabelece, no seu modelo tricromático, que sistemas de processamento de cor do olho humano baseiam-se na amostragem das faixas vermelha, verde e azul do espectro visível, feitas pelas moléculas fotossensíveis do olho. E com isso, surge o primeiro modelo padrão básico: CIE-RGB (CIE: Commission Internationale de l'Eclairage).
+
+\vspace{0.3cm}
+
+\noindent {\large\textbf{2. O modelo XYZ e a mudança de coordenadas em relação ao RGB}}
+
+Devido a incapacidade que o monitor possuía em projetar todas as cores visíveis pelo olho humano, o sistema CIE-XYZ foi criado para trazer modificações de proporções de intensidade das cores.
+
+No sistema XYZ as coordenadas das cores primárias (RGB) são dadas pelos seguintes vetores: \linebreak $R = (0.73467, 0.26533, 0.0)$, $G = (0.27376, 0.71741, 0.00883)$, $B = (0.16658, 0.00886, 0.82456)$, os quais \linebreak correspondem aos vetores $R=(1,0,0)$, $G=(0,1,0)$ e $B=(0,0,1)$ no sistema RGB. Para obter uma transformação entre esses dois sistemas devemos buscar um outro conjunto de vetores comum aos espaços XYZ e RGB. Uma escolha natural consiste em tomar os vetores que correspondem a cor branca em cada um dos sistemas, que tem coordenadas $\displaystyle \left(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}\right)$. Dessa forma, a transformação linear do sistema RGB no sistema XYZ é definida por $T(R,G,B)=(X,Y,Z)$ e, usando o fato que $T\displaystyle \left(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}\right)=\displaystyle \left(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}\right)$ obtemos uma matriz de transformação de coordenadas dada por:
+$$ \left(
+\begin{array}{ccc}
+ X \\
+Y\\
+Z
+\end{array}
+\right) =
+ \left(
+\begin{array}{ccc}
+0.49   & 0.17697    & 0  \\
+0.31  & 0.81240     & 0.01 \\
+0.2   & 0.01063 & 0.99
+\end{array}
+\right)
+.
+\left(
+\begin{array}{ccc}
+ R  \\
+G \\
+B
+\end{array}
+\right)
+$$
+
+\noindent que faz a mudança de coordenadas no sistema RGB para o sistema XYZ.
+	
+
+\vspace{0.3cm}
+
+\noindent{\large\textbf{3. O modelo CMY e a mudança de coordenadas em relação ao RGB}}
+
+Baseando-se nas cores complementares, o CMY é designado por modelo subtrativo de cor, opondo-se ao modelo RGB que é designado por modelo aditivo de cor. É muito utilizado em impressão a cores em papel branco (como já foi citado na introdução).
+
+A transformação do espaço CMY no espaço RGB é a mais simples, basicamente consiste em
+$$
+\left(
+\begin{array}{ccc}
+R    \\
+G  \\
+B
+\end{array}
+\right)
+=\left(
+\begin{array}{ccc}
+1    \\
+1  \\
+1
+\end{array}
+\right)
+-
+\left(
+\begin{array}{ccc}
+C    \\
+M  \\
+Y	
+\end{array}
+\right).
+$$
+
+Isso ocorre, pois as cores no sistema CMY localizam-se em um subespaço com a forma de um cubo, no qual três vértices representam as cores base desse sistema, como podemos observar na figura seguinte.
+
+ \vspace{0.3cm}
+
+
+ \newpage
+
+
+\noindent{\large\textbf{4. O modelo YIQ e a mudança de coordenadas em relação ao RGB}}
+
+Utilizado no sistema NTSC (National Television Standards Committee) o modelo YIQ foi criado para permitir que as emissões dos sistemas de televisão em cores fossem compatíveis com os receptores em preto e branco. Baseia-se na divisão dos sinais de cor RGB em um sinal de luminosidade, ou luminância $(Y)$, dada por:
+ $$ Y=0.299\, R+ 0.587 \, G+ 0.114 \, B. $$
+
+Os parâmetros $I$ e $Q$ estão relacionados às cores propriamente, então envolvem luminância e as cores RGB em suas fórmulas, como podemos observar:
+$$I=0.74(R-Y)-0.27(B-Y)$$
+$$Q=0.48(R-Y)+0.41(B-Y).$$
+ 	
+Dessa forma, isolando as variáveis $Y$, $I$ e $Q$ em função de $R$, $G$ e $B$, chegamos na seguinte matriz de transformação do espaço de cor RGB para o espaço YIQ
+$$ \left(
+\begin{array}{ccc}
+ Y  \\
+I \\
+Q
+\end{array}
+\right) =
+ \left(
+\begin{array}{ccc}
+0.299   & 0.587    & 0.114  \\
+0.596  & -0.275      & -0.321 \\
+0.212   & -0.523 & -0.311
+\end{array}
+\right)
+.
+\left(
+\begin{array}{ccc}
+ R  \\
+G \\
+B
+\end{array}
+\right).
+$$
+	
+
+
+\section*{Conclusão}
+
+No trabalho podemos observar que a álgebra linear auxiliou processos de cálculo para que as cores possam ser exibidas e transmitidas em diferentes plataformas, como televisores, monitores, etc. O ponto mais importante desse trabalho é como vários sistemas de cores podem ser reduzidos a espaços vetoriais e manipulados facilmente através de transformações lineares.
+
+
+\section*{Referências}
+
+\noindent [1] Biezuner, R. J.; Macedo, E. A. A.; Moreira, B. T. \textit{Mudanças de coordenadas em sistemas de cores}. Belo Horizonte: UFMG. Google Acadêmico. PDF.
+
+\noindent [2] Gomes, J. (1994). \textit{Computação gráfica: imagem}. Rio de Janeiro: IMPA/SBM.
+
+\noindent [3] Howard, A.; Rorres, C. (2001). \textit{Álgebra linear com aplicações}. Porto Alegre: Bookman.
+
+\end{document}
+
+\grid
